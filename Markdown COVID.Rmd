@@ -20,6 +20,10 @@ When you click the **Knit** button a document will be generated that includes bo
 You can also embed plots, for example:
 
 ```{r Center_County , echo=FALSE}
+install.packages("tidyverse")
+install.packages("readr")
+install.packages("dplyr") 
+install.packages("readxl")
 library(readr)
 library(dplyr)
 library(tidyr)
