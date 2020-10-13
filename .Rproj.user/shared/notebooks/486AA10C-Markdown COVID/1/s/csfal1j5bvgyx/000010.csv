@@ -1,0 +1,33 @@
+"0","#why does plot(penn_map$NAME_2) not work?"
+"0",""
+"0","#library(tmap)"
+"0","Total_Sum_PA<- inner_join(penn_map,COVID_Sum, by= ""Admin2"")"
+"0","#tmap_mode(mode = ""plot"")"
+"0",""
+"0","#tm_shape(Total_Sum_PA) +"
+"0","  #tm_polygons(col = ""Total_cases"", title = ""Total Cases"", palette = ""-RdYlBu"")"
+"0",""
+"0",""
+"0","library(readxl)"
+"0","Population_Data <- read_excel(""Population_Data.xlsx"")"
+"2","New names:
+* `` -> ...2
+* `` -> ...3
+* `` -> ...4
+* `` -> ...5
+* `` -> ...6
+* ...
+"
+"0","colnames(Population_Data) <- Population_Data[1,]"
+"0","Population_Data = Population_Data[-c(1,2,70,71,72,73,74),]"
+"0","census_data <- select(Population_Data,""Admin2"",""2019"") %>%"
+"0","  mutate(Admin2 = gsub("" "","""", (gsub(""\\."", """", gsub(""County, Pennsylvania"", """", Admin2) ))))"
+"0","relative_data <- inner_join(census_data,Total_Sum_PA, ""Admin2"") %>% "
+"0","  rename(""Census""='2019' ) %>% "
+"0","  select(Admin2, Total_cases, Census ) %>% "
+"0","  mutate(relativeCases = (Total_cases/Census * 100000))"
+"0",""
+"0","library(tmap)"
+"0","Total_Rel_PA <- inner_join(penn_map,relative_data, by= ""Admin2"")"
+"0","tm_shape(Total_Rel_PA) +"
+"0","  tm_polygons(col = ""relativeCases"", title = ""Cases/100000"", palette = ""-RdYlBu"")"
